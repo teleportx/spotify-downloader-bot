@@ -21,7 +21,7 @@ else:
     for file in os.listdir(config.temp_dir):
         shutil.rmtree(f'{config.temp_dir}/{file}')
 
-with open('users.json', 'a+') as fp:
+with open('data/users.json', 'a+') as fp:
     fp.seek(0)
     if fp.read() == '':
         fp.write('[]')
@@ -55,7 +55,7 @@ async def download_song(message: types.Message):
     answer = await message.reply('Starting download...')
 
     path = f'{config.temp_dir}/{message.message_id}/{url[32:url.find("?")]}'
-    executing = await asyncio.create_subprocess_shell(f'spotifydl --o {path} --oo {url}',
+    executing = await asyncio.create_subprocess_shell(f'cd spotify-dl && npm run start -- --o ../{path} --oo {url}',
                                                       stderr=asyncio.subprocess.DEVNULL)  # The creator of spotifydl writes all logs to stderr
     await executing.communicate()
 

@@ -1,0 +1,10 @@
+version: '2.2'
+services:
+   spotify_downloader_bot:
+       build: .
+       working_dir: /app
+       command: >
+           python3.10 -m main
+       restart: always
+       volumes:
+           - /path/to/datadir:/app/data

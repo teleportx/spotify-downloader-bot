@@ -1,9 +1,12 @@
-import string
+import os
 from os import environ
 
 from dotenv import load_dotenv
 
 load_dotenv()
+
+if not os.path.exists('data'):
+    os.mkdir('data')
 
 
 class Telegram:
